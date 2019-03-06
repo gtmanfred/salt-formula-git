@@ -12,25 +12,25 @@ git_packages:
 
 {%- for user in client.user %}
 
-set_git_{{ user.user.name|tojson }}_param_username:
+set_git_{{ user.user.name }}_param_username:
   git.config_set:
-  - user: {{ user.user.name|tojson }}
+  - user: {{ user.user.name }}
   - name: user.name
-  - value: "{{ user.user.get('full_name', user.user.name)|tojson }}"
+  - value: "{{ user.user.get('full_name', user.user.name) }}"
   - global: True
   - require:
-    - user: system_user_{{ user.user.name|tojson }}
+    - user: system_user_{{ user.user.name }}
 
 {%- if user.user.email is defined %}
 
-set_git_{{ user.user.name|tojson }}_param_email:
+set_git_{{ user.user.name }}_param_email:
   git.config_set:
-  - user: {{ user.user.name|tojson }}
+  - user: {{ user.user.name }}
   - name: user.email
-  - value: "{{ user.user.email|tojson }}"
+  - value: "{{ user.user.email }}"
   - global: True
   - require:
-    - user: system_user_{{ user.user.name|tojson }}
+    - user: system_user_{{ user.user.name }}
 
 {%- endif %}
 
@@ -38,12 +38,12 @@ set_git_{{ user.user.name|tojson }}_param_email:
 
 set_git_ssl_verification_off:
   git.config_set:
-  - user: {{ user.user.name|tojson }}
+  - user: {{ user.user.name }}
   - name: http.sslVerify
   - value: "false"
   - global: True
   - require:
-    - user: system_user_{{ user.user.name|tojson }}
+    - user: system_user_{{ user.user.name }}
 
 {%- endif %}
 
